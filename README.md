@@ -14,15 +14,15 @@ Dane są pobierane z API Coingecko.
 
 ## By uruchomić projekt należy zainstalować:
 
-##### ejs
-$ npm install ejs
-##### express
-$ npm install express
-##### request
-$ npm install request
+### EJS
+``` $ npm install ejs ```
+### Express
+``` $ npm install express ```
+### Request
+``` $ npm install request ```
 
 ## Strona uruchamia się lokalnie pod adresem:
-$ http://localhost:4000
+``` http://localhost:4000 ```
 
 ## Wygląd aplikacji
 
