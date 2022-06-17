@@ -1,0 +1,200 @@
+@import url('https://fonts.googleapis.com/css2?family=Arvo&display=swap');
+
+html {
+    scroll-behavior: smooth;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Arvo', 'Arial', serif;
+}
+
+body {
+    overflow-x: hidden;
+}
+
+header {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #222831;
+    width: 100vw;
+    flex-wrap: wrap;
+}
+
+.logo,
+li,
+a {
+    text-decoration: none;
+    list-style: none;
+    color: #ffffff;
+    font-size: 1.3rem;
+    transition: all 1s ease 0s;
+}
+
+.logo {
+    text-transform: uppercase;
+    margin-right: auto;
+    margin-left: 5%;
+    cursor: default;
+}
+
+nav li {
+    display: inline-block;
+    padding: 0 5vw;
+}
+
+.main {
+    background-color: #393e46;
+    position: relative;
+    width: 100%;
+}
+
+#about,
+#offer,
+#contact,
+footer {
+    width: 80%;
+    margin: 0 auto;
+    color: #ffffff;
+    cursor: default;
+}
+
+.offer {
+    display: flex;
+    /* justify-content: space-around; */
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+article {
+    border: 5px solid #00b56a;
+    width: 25%;
+    height: 20vh;
+    margin: 3vh;
+    border-radius: 20px;
+    padding: 2px;
+    text-align: center;
+    z-index: 1;
+    transition: .5s ease;
+}
+
+article:hover {
+    transform: scale(1.1);
+    border-color: #00b527;
+}
+
+hr {
+    border-style: none;
+    border-top: dotted 10px;
+    color: #00b56a;
+    width: 8%;
+    margin: 0 auto;
+}
+
+h2 {
+    font-size: 2rem;
+    padding: 25px 0px;
+}
+
+h3 {
+    padding: 10px 0px;
+}
+
+article p {
+    padding: 0 10px 10px 10px;
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.container {
+    flex-direction: column;
+    justify-content: center;
+    margin: 1vw;
+}
+
+.containerv1 {
+    display: flex;
+    justify-content: center;
+}
+
+.containerv2 {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+#triangle1 {
+    position: absolute;
+    left: 0%;
+    top: 0;
+    z-index: 0;
+    width: 0;
+    height: 0;
+    border-top: 25vw solid #00b56a;
+    border-right: 25vw solid transparent;
+    margin: 0 auto 0;
+}
+
+#about p,
+#about h2,
+.adress,
+#offer {
+    position: relative;
+    z-index: 1;
+}
+
+#about h2 {
+    font-size: 48px;
+}
+
+#about p {
+    margin: 2vw;
+    text-align: center;
+    font-size: 36px;
+}
+
+footer {
+    margin: 5vh auto 0;
+    background-color: #222831;
+    width: 100vw;
+    text-align: center;
+
+}
+
+footer p {
+    padding: 20px;
+    width: 70%;
+    height: 10vh;
+    margin: auto;
+}
+
+select {
+    width: fit-content;
+    appearance: none;
+    border: 0;
+    outline: 0;
+    font: inherit;
+    width: 20em;
+    height: 3em;
+    padding: 0 4em 0 1em;
+    background: url(https://upload.wikimedia.org/wikipedia/commons/9/9d/Caret_down_font_awesome_whitevariation.svg) no-repeat right 0.8em center / 1.4em, #00B56A;
+    color: white;
+    border-radius:15px;
+    box-shadow: 0 0 1em 0 rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+}
+
+option {
+    color: inherit;
+    background-color: #00b57c;
+}
+.red{
+    color: red;
+}
+.green{
+    color: #00b527;
+}

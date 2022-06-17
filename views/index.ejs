@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kryptowaluty</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+</head>
+
+<body>
+  <header>
+    <div class="logo">
+      <h2>Rynek Kryptowalut</h2>
+    </div>
+    <nav>
+      <ul>
+        <li>
+          <form method="post">
+            <select name='selectCoin' onchange='this.form.submit()'>
+              <option>Wybierz Kryptowalute</option>
+              <option value="bitcoin">Bitcoin(BTC) </option>
+              <option value="ethereum">Ethereum(ETH)</option>
+              <option value="litecoin">Litecoin(LTC)</option>
+              <option value="ripple">Ripple(XRP)</option>
+            </select>
+          </form>
+        </li>
+      </ul>
+    </nav>
+
+  </header>
+
+  <div class="main">
+    <div id="triangle1"></div>
+    <div id="about">
+      <h2><%- dataFormApi.name %></h2>
+      <p>
+        Aktualna Cena:
+        <%- dataFormApi.market_data.current_price.pln %> PLN</p>
+      <div class="container">
+        <div class="containerv1">
+          <div id="chart1"></div>
+        </div>
+
+        <div class="containerv2">
+          <div id="chart2"></div>
+          <div id="chart3"></div>
+        </div>
+      </div>
+
+
+    </div>
+    <hr />
+    <div id="offer">
+      <h2>Najważniejsze dane analityczne</h2>
+      <div class="offer">
+        <article>
+          <h3>Najwyższa cena w historii</h3>
+          <p>
+            <%- dataFormApi.market_data.ath.pln %> PLN
+          </p>
+        </article>
+        <article>
+          <h3>Najniższa cena w historii</h3>
+          <p>
+            <%- dataFormApi.market_data.atl.pln %> PLN
+          </p>
+        </article>
+        <article>
+          <h3>Najwyższa cena w ciągu 24H</h3>
+          <p>
+            <%- dataFormApi.market_data.high_24h["pln"] %> PLN
+          </p>
+        </article>
+        <article>
+          <h3>Najniższa cena w ciągu 24H</h3>
+          <p>
+            <%- dataFormApi.market_data.low_24h["pln"] %> PLN
+          </p>
+        </article>
+        <article>
+          <h3> Całkowita wartość w 24H</h3>
+
+          <% if(dataFormApi.market_data.market_cap_change_percentage_24h>0){ %>
+          <p class="green">
+            <% }else {%>
+            <p class="red">
+              <%-dataFormApi.market_data.market_cap_change_percentage_24h %> %
+            </p><% } %>
+        </article>
+        <article>
+          <h3> Zmiana ceny w Ciągu 24H</h3>
+          <% if(dataFormApi.market_data.price_change_24h_in_currency.pln>0){ %>
+          <p class="green">
+            <% }else {%>
+            <p class="red">
+              <%-dataFormApi.market_data.price_change_24h_in_currency.pln %> PLN
+            </p><% } %>
+
+        </article>
+        <article>
+          <h3> Całkowita wartość</h3>
+          <p>
+            <%- dataFormApi.market_data.total_volume.pln %> PLN
+          </p>
+        </article>
+        <article>
+          <h3> Ilość waluty w obiegu</h3>
+          <p>
+            <%- dataFormApi.market_data["circulating_supply"] %>
+          </p>
+        </article>
+        <article>
+          <h3> Ilość osób śledzących walutę</h3>
+          <p>
+            <%= dataFormApi.community_data.twitter_followers %>
+          </p>
+        </article>
+      </div>
+
+    </div>
+    <footer>
+      <p>©2022 Szymon Napieraj</p>
+    </footer>
+    <script>
+      let dataPrices = '<%- JSON.stringify(dataToChart.prices) %>'
+      dataPrices = String(dataPrices)
+      dataPrices = JSON.parse(dataPrices)
+      var options1 = {
+        chart: {
+          height: 500,
+          width: 900,
+          type: 'area'
+        },
+        grid: {
+          show: false
+        },
+        title: {
+          text: "Cena rynkowa w PLN",
+          style: {
+            fontSize: '28px',
+            fontWeight: 'bold',
+            color: '#ffffff'
+          }
+        },
+        stroke: {
+          curve: 'smooth'
+        },
+        series: [{
+          name: 'Cena rynkowa',
+          data: dataPrices
+        }],
+        xaxis: {
+          type: "datetime"
+        },
+        dataLabels: {
+          enabled: false
+        },
+        colors: ["#00b56a"],
+        tooltip: {
+          y: {
+            formatter: (value) => {
+              return value.toFixed(1)
+            }
+          },
+          theme: "dark"
+        },
+        yaxis: {
+          show: false
+        }
+      }
+
+      let dataMarketCap = '<%- JSON.stringify(dataToChart.market_caps) %>'
+      dataMarketCap = String(dataMarketCap)
+      dataMarketCap = JSON.parse(dataMarketCap)
+      var options2 = {
+        chart: {
+          height: 300,
+          width: 500,
+          type: 'area'
+        },
+        grid: {
+          show: false
+        },
+        theme: {
+          mode: 'dark'
+        },
+        series: [{
+          name: 'Ilość na rynku',
+          data: dataMarketCap,
+        }],
+        xaxis: {
+          type: "datetime"
+        },
+        dataLabels: {
+          enabled: false
+        },
+        theme: {
+          monochrome: {
+            shadeTo: 'light',
+          },
+        },
+        title: {
+          text: "Ilość na rynku",
+          style: {
+            fontSize: '28px',
+            fontWeight: 'bold',
+            color: '#ffffff '
+          }
+        },
+        colors: ["#ff0000"],
+        tooltip: {
+          y: {
+            formatter: (value) => {
+              return value.toFixed(1)
+            }
+          },
+          theme: "dark"
+        },
+        yaxis: {
+          show: false
+        }
+      }
+
+      let dataTotalVolume = '<%- JSON.stringify(dataToChart.total_volumes) %>'
+      dataTotalVolume = String(dataTotalVolume)
+      dataTotalVolume = JSON.parse(dataTotalVolume)
+      var options3 = {
+        chart: {
+          height: 300,
+          width: 500,
+          type: 'area'
+        },
+        theme: {
+          mode: 'dark'
+        },
+        grid: {
+          show: false
+        },
+        title: {
+          text: "Wielkość rynku",
+          style: {
+            fontSize: '28px',
+            fontWeight: 'bold',
+            color: '#ffffff '
+          }
+        },
+        series: [{
+          name: 'Wielkość rynku',
+          data: dataTotalVolume,
+        }],
+        xaxis: {
+          type: "datetime"
+        },
+        dataLabels: {
+          enabled: false
+        },
+        theme: {
+          monochrome: {
+            shadeTo: 'light',
+          }
+        },
+        colors: ["#3cdfff"],
+        tooltip: {
+          y: {
+            formatter: (value) => {
+              return value.toFixed(1)
+            }
+          },
+          theme: "dark"
+        },
+        yaxis: {
+          show: false
+        }
+      }
+
+    var chartPrices = new ApexCharts(document.querySelector("#chart1"), options1);
+    chartPrices.render();
+
+    var chartMarketCaps = new ApexCharts(document.querySelector("#chart2"), options2);
+    chartMarketCaps.render();
+
+    var chartTotalVolumes = new ApexCharts(document.querySelector("#chart3"), options3);
+    chartTotalVolumes.render();
+    </script>
+
+</body>
+</html>
